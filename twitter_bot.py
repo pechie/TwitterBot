@@ -22,13 +22,6 @@ class StreamListener(tweepy.StreamListener):
                 tweet.retweet()
             except Exception as e:
                 print("Error: Could not retweet tweet")
-        self.api.update_status(
-            # Need to randomly select status from dict
-            # or have different replies for different users
-            status="Good Tweet",
-            in_reply_to_status_id=tweet.id,
-            auto_populate_reply_metadata=True
-        )
 
     def on_error(self, status):
         print("Status: ", status)
@@ -57,24 +50,30 @@ def check_mentions(api, since_id):
     return new_since_id
 
 
+def follow_followers(api):
+    print("Getting followers")
+    for follower in tweepy.Cursor(api.followers).items():
+        if not follower.following:
+            print("Now following ", follower.name)
+            follower.follow()
+
+
 def main():
     api = create_api()
     tweets_listener = StreamListener(api)
     stream = tweepy.Stream(api.auth, tweets_listener)
+    # Filter to only interact with specified users
     stream.filter(follow=constants.ids)
 
     since_id = 1
+    # Infinite loop so that the program is constantly checking mentions
     while True:
         since_id = check_mentions(api, since_id)
+        follow_followers(api)
         print("Waiting...")
-        time.sleep(10)
+        time.sleep(5)
     # Stop program on keyboard interrupt
 
 
 if __name__ == "__main__":
     main()
-
-# Need to add follow followers function,
-# which may be difficult because it is a locked account
-# Add to FavRetweetListener, which should be renamed to StreamListener
-# Reply to mentions with either "Bold and Brash" or "Belongs in the trash"
