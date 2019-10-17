@@ -3,7 +3,7 @@ import time
 from TwitterBotPackage import constants
 
 
-class FavRetweetListener(tweepy.StreamListener):
+class StreamListener(tweepy.StreamListener):
     def __init__(self, api):
         self.api = api
         self.me = api.me()
@@ -59,7 +59,7 @@ def check_mentions(api, since_id):
 
 def main():
     api = create_api()
-    tweets_listener = FavRetweetListener(api)
+    tweets_listener = StreamListener(api)
     stream = tweepy.Stream(api.auth, tweets_listener)
     stream.filter(follow=constants.ids)
 
