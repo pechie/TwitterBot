@@ -1,2 +1,2 @@
 # TwitterBot
-Python code for the twitter bot @BotAndBrash
+Javascript code for the twitter bot @BoldAndBrashBot
