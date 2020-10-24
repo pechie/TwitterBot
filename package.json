@@ -1,0 +1,23 @@
+{
+  "name": "TwitterBot",
+  "version": "1.0.0",
+  "description": "Python code for the twitter bot @BotAndBrash",
+  "main": "twitter_bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pechie/TwitterBot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pechie/TwitterBot/issues"
+  },
+  "homepage": "https://github.com/pechie/TwitterBot#readme",
+  "dependencies": {
+    "twit": "^2.2.11"
+  }
+}
